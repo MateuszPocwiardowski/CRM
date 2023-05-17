@@ -1,5 +1,6 @@
 <template>
   <form class="form" @submit.prevent="submit">
+    <h3 class="title">Login</h3>
     <div class="form-control">
       <label>Username</label>
       <div class="input-wrapper">
@@ -45,6 +46,12 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    align-self: center;
 }
 
 .form-control {
