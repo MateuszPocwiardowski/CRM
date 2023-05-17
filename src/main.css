@@ -1,0 +1,33 @@
+:root {
+  --colour-white: #ffff;
+  --colour-dark-green: #398562;
+  --colour-green: #42b883;
+  --colour-light-green: #42d3926c;
+  --colour-lighter-green: #42d3922f;
+  --colour-grey: #919191;
+  --colour-light-grey: #9c9c9c;
+  --colour-dark-grey: #282828;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--colour-dark-grey);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
