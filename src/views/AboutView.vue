@@ -13,6 +13,6 @@ export default {}
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 3rem 1rem;
+  margin: 3rem 1rem;
 }
 </style>

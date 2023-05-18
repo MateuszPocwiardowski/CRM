@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       error: false,
-      warning: `<span class="warning">Invalid username or e-mail!</span>`
+      warning: `<span class="warning">Invalid e-mail!</span>`
     }
   },
   methods: {
