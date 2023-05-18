@@ -1,11 +1,17 @@
 <template>
   <main class="main">
-    <h2>Home</h2>
+    <TheLoginForm></TheLoginForm>
   </main>
 </template>
 
 <script>
-export default {}
+import TheLoginForm from '../components/layout/TheLoginForm.vue'
+
+export default {
+  components: {
+    TheLoginForm
+  }
+}
 </script>
 
 <style scoped>

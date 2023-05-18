@@ -1,13 +1,25 @@
 <template>
   <form class="form" @submit.prevent="submit">
-    <h3 class="title">Login</h3>
+    <div class="title-wrapper">
+      <h2>Hello!</h2>
+      <h4>Welcome back you've been missed!</h4>
+    </div>
+
     <div class="form-control">
-      <label>Username</label>
+      <label>E-mail</label>
       <div class="input-wrapper">
         <font-awesome-icon icon="fa-solid fa-user" />
-        <input type="text" name="name" placeholder="Type your username" ref="login" />
+        <input
+          type="email"
+          name="email"
+          placeholder="Type your e-mail"
+          ref="email"
+          @focus="resetError"
+        />
       </div>
+      <div v-html="warning" v-if="error"></div>
     </div>
+
     <div class="form-control">
       <label for="password">Password</label>
       <div class="input-wrapper">
@@ -18,22 +30,55 @@
           name="name"
           placeholder="Type your password"
           ref="password"
+          @focus="resetError"
         />
       </div>
+      <div v-html="warning" v-if="error"></div>
     </div>
-    <a class="link" href="www.google.pl">Forgot password?</a>
+
+    <RouterLink class="link" to="/reset-password">Forgot password?</RouterLink>
+
     <base-button :type="submit"> Login </base-button>
   </form>
 </template>
 
 <script>
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
+
 export default {
+  data() {
+    return {
+      error: false,
+      warning: `<span class="warning">Invalid username or password!</span>`
+    }
+  },
   methods: {
+    resetError() {
+      this.error = false
+    },
     async submit() {
-      const enteredLogin = this.$refs.login.value
+      const enteredEmail = this.$refs.email.value
       const enteredPassword = this.$refs.password.value
 
-      console.log(enteredLogin, enteredPassword)
+      if (enteredEmail.trim() === '' || enteredPassword.trim() === '') {
+        this.error = true
+
+        return
+      }
+
+      try {
+        const response = await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+
+        if (response.user.accessToken) {
+          this.$router.push('/')
+        }
+      } catch {
+        this.error = true
+      }
+
+      this.$refs.email.value = ''
+      this.$refs.password.value = ''
     }
   }
 }
@@ -42,16 +87,19 @@ export default {
 <style scoped>
 .form {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.title {
-    font-weight: 600;
-    font-size: 1.5rem;
-    align-self: center;
+.title-wrapper {
+  align-self: center;
+  text-align: center;
+
+  @media (min-width: 769px) {
+    margin-bottom: 1rem;
+  }
 }
 
 .form-control {
@@ -70,7 +118,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--colour-light-grey);
 }
 
@@ -84,7 +132,6 @@ export default {
   font-weight: 1rem;
   font-size: 1rem;
   color: var(--colour-light-grey);
-  padding-bottom: 6px;
   outline: none;
   border: none;
   width: 100%;

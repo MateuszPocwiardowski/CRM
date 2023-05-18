@@ -1,5 +1,6 @@
 :root {
   --colour-white: #ffff;
+  --colour-red: #cc2c2c;
   --colour-dark-green: #398562;
   --colour-green: #42b883;
   --colour-light-green: #42d3926c;
@@ -23,6 +24,31 @@ body {
   color: var(--colour-dark-grey);
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 0.8rem;
+  color: var(--colour-light-grey);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -30,4 +56,29 @@ a {
 
 button {
   font-family: inherit;
+}
+
+.warning {
+  color: var(--colour-red);
+}
+
+@media (min-width: 769px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1rem;
+    color: var(--colour-light-grey);
+  }
 }

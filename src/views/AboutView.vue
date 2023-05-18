@@ -1,5 +1,18 @@
 <template>
-  <div class="about"></div>
+  <main class="main">
+    <h2>About</h2>
+  </main>
 </template>
 
-<style></style>
+<script>
+export default {}
+</script>
+
+<style scoped>
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+</style>
