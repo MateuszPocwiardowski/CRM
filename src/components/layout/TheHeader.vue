@@ -1,7 +1,10 @@
 <template>
   <header class="header">
     <base-wrapper>
-      <RouterLink to="/"><h1 class="logo">Vue.js</h1></RouterLink>
+      <RouterLink to="/" class="logo"
+        ><h1>Vue<div class="logo-green">.js</div>
+        </h1></RouterLink
+      >
 
       <!-- TODO: Change visiblity conditionally when user is logged in/out -->
       <nav class="nav">
@@ -38,6 +41,16 @@ export default {
 
 .logo {
   font-size: 1rem;
+}
+
+.logo-green {
+  display: inline;
+  font-weight: inherit;
+  color: var(--colour-green);
+}
+
+.logo h1 {
+  font-size: inherit;
 }
 
 .nav {

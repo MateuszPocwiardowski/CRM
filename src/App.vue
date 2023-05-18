@@ -1,16 +1,20 @@
 <template>
-  <the-header></the-header>
-
-  <RouterView />
+  <div class="layout">
+    <the-header></the-header>
+    <RouterView class="main" />
+    <the-footer></the-footer>
+  </div>
 </template>
 
 <script>
 import { RouterView } from 'vue-router'
 import TheHeader from './components/layout/TheHeader.vue'
+import TheFooter from './components/layout/TheFooter.vue'
 
 export default {
   components: {
-    'the-header': TheHeader
+    'the-header': TheHeader,
+    'the-footer': TheFooter
   },
   data() {
     return {
@@ -25,4 +29,14 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1 1;
+}
+</style>

@@ -9,13 +9,14 @@ import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock, faLaptopCode } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import './main.css'
 
 const app = createApp(App)
 
-library.add(faUser, faLock)
+library.add(faUser, faLock, faLaptopCode, faLinkedin, faGithub)
 
 app.component('base-wrapper', BaseWrapper)
 app.component('base-button', BaseButton)
