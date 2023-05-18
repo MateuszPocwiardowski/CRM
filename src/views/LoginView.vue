@@ -19,6 +19,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 3rem 1rem;
+  padding: 3rem 1rem;
 }
 </style>
