@@ -1,10 +1,11 @@
 <template>
   <header class="header">
     <base-wrapper>
-      <RouterLink to="/" class="logo"
-        ><h1>Vue<div class="logo-green">.js</div>
-        </h1></RouterLink
-      >
+      <RouterLink to="/" class="logo">
+        <h1>
+          Vue<div class="logo-green">.js</div>
+        </h1>
+      </RouterLink>
 
       <!-- TODO: Change visiblity conditionally when user is logged in/out -->
       <nav class="nav">

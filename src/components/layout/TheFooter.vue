@@ -4,7 +4,7 @@
       <div class="footer-inner">
         <div class="nav-container">
           <nav class="nav">
-            <RouterLink to="/">Vue<div class="logo-white">.js</div></RouterLink>
+            <base-logo></base-logo>
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/about">About</RouterLink>
             <RouterLink to="/login">Login</RouterLink>
@@ -29,11 +29,11 @@
         <div class="right-container">
           <span class="right">
             Copyright
-            <strong class="small-logo">Vue<div class="logo-white">.js</div></strong>
+            <base-logo></base-logo>
             {{ currentYear }}
             All right reserved
           </span>
-          <RouterLink to="/" class="logo"><h2>Vue<div class="logo-white">.js</div></h2></RouterLink>
+          <base-logo class="centered-logo"></base-logo>
         </div>
       </div>
     </base-wrapper>
@@ -135,22 +135,11 @@ export default {
   }
 }
 
-.small-logo {
-  font-weight: 600;
-}
-
-.logo {
+.right {
   align-self: center;
-  font-weight: 600;
 }
 
-.logo h2 {
-  font-size: inherit;
-}
-
-.logo-white {
-  display: inline;
-  font-weight: inherit;
-  color: var(--colour-green);
+.centered-logo {
+  align-self: center;
 }
 </style>
