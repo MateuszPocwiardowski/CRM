@@ -15,6 +15,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import './main.css'
 
+const pinia = createPinia()
 const app = createApp(App)
 
 library.add(faUser, faLock, faLaptopCode, faLinkedin, faGithub)
@@ -24,7 +25,7 @@ app.component('base-button', BaseButton)
 app.component('base-logo', BaseLogo)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
-app.use(createPinia())
 app.use(router)
+app.use(pinia)
 
 app.mount('#app')

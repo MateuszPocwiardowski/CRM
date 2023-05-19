@@ -1,13 +1,14 @@
 <template>
   <div class="layout">
     <the-header></the-header>
-    <RouterView class="main" />
+    <RouterView class="context" />
     <the-footer></the-footer>
   </div>
 </template>
 
 <script>
 import { RouterView } from 'vue-router'
+
 import TheHeader from './components/layout/TheHeader.vue'
 import TheFooter from './components/layout/TheFooter.vue'
 
@@ -15,16 +16,6 @@ export default {
   components: {
     'the-header': TheHeader,
     'the-footer': TheFooter
-  },
-  data() {
-    return {
-      isLoggedIn: false
-    }
-  },
-  provide() {
-    return {
-      isLoggedIn: this.isLoggedIn
-    }
   }
 }
 </script>
@@ -36,7 +27,11 @@ export default {
   min-height: 100vh;
 }
 
-.main {
+.context {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   flex: 1 1;
+  padding: 3rem 1rem;
 }
 </style>

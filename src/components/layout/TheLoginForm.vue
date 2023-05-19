@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase'
+import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
 
 export default {
   data() {
@@ -52,6 +52,9 @@ export default {
       error: false,
       warning: `<span class="warning">Invalid username or password!</span>`
     }
+  },
+  computed: {
+    ...mapStores(useAuthStore)
   },
   methods: {
     resetError() {
@@ -68,11 +71,8 @@ export default {
       }
 
       try {
-        const response = await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-
-        if (response.user.accessToken) {
-          this.$router.push('/')
-        }
+        this.authStore.login({ login: enteredEmail, password: enteredPassword })
+        this.$router.replace('/')
       } catch {
         this.error = true
       }

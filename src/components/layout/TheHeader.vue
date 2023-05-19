@@ -3,30 +3,37 @@
     <base-wrapper>
       <RouterLink to="/" class="logo">
         <h1>
-          Vue<div class="logo-green">.js</div>
+          Vue
+          <div class="logo-green">.js</div>
         </h1>
       </RouterLink>
 
-      <!-- TODO: Change visiblity conditionally when user is logged in/out -->
-      <nav class="nav">
-        <!-- <nav v-if="isLoggedIn" class="nav"> -->
+      <nav v-if="authStore.isLoggedIn" class="nav">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <!-- </nav> -->
-        <!-- <nav v-else class="nav"> -->
+        <RouterLink to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
+      </nav>
+      <nav v-else class="nav">
         <RouterLink to="/login">Login</RouterLink>
-        <!-- </nav> -->
       </nav>
     </base-wrapper>
   </header>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
+
 export default {
-  inject: ['isLoggedIn'],
   computed: {
+    ...mapStores(useAuthStore),
     currentRouteName() {
       return this.$route.name
+    }
+  },
+  methods: {
+    logout() {
+      this.authStore.logout()
     }
   }
 }
@@ -67,11 +74,9 @@ span {
 
 .nav a.router-link-active {
   background-color: var(--colour-lighter-green);
-  /* border-bottom: 2px solid var(--colour-light-green); */
 }
 
 .nav a:hover {
   background-color: var(--colour-light-green);
-  /* border-bottom: 2px solid var(--colour-green); */
 }
 </style>
