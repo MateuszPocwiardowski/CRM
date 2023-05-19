@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../firebase'
 
 export const useAuthStore = defineStore('auth', {
@@ -17,7 +17,16 @@ export const useAuthStore = defineStore('auth', {
           this.isLoggedIn = true
         }
       } catch {
-        return { error: true }
+        throw new Error('Login failed')
+      }
+    },
+    async recover({ login }) {
+      try {
+        const response = await sendPasswordResetEmail(auth, login)
+
+        console.log(response)
+      } catch {
+        throw new Error('Recovering password failed')
       }
     },
     logout() {

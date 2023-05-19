@@ -40,6 +40,10 @@
 
     <base-button :type="submit"> Login </base-button>
   </form>
+
+  <teleport to="body" v-if="loading">
+    <base-loader></base-loader>
+  </teleport>
 </template>
 
 <script>
@@ -49,6 +53,7 @@ import { useAuthStore } from '../../stores/auth'
 export default {
   data() {
     return {
+      loading: false,
       error: false,
       warning: `<span class="warning">Invalid username or password!</span>`
     }
@@ -71,9 +76,13 @@ export default {
       }
 
       try {
-        this.authStore.login({ login: enteredEmail, password: enteredPassword })
+        this.loading = true
+        await this.authStore.login({ login: enteredEmail, password: enteredPassword })
+
         this.$router.replace('/')
-      } catch {
+        this.loading = false
+      } catch (err) {
+        this.loading = false
         this.error = true
       }
 

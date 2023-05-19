@@ -5,6 +5,7 @@ import App from './App.vue'
 import BaseWrapper from './components/UI/BaseWrapper.vue'
 import BaseButton from './components/UI/BaseButton.vue'
 import BaseLogo from './components/UI/BaseLogo.vue'
+import BaseLoader from './components/UI/BaseLoader.vue'
 
 import router from './router'
 
@@ -23,6 +24,7 @@ library.add(faUser, faLock, faLaptopCode, faLinkedin, faGithub)
 app.component('base-wrapper', BaseWrapper)
 app.component('base-button', BaseButton)
 app.component('base-logo', BaseLogo)
+app.component('base-loader', BaseLoader)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(router)

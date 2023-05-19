@@ -27,18 +27,26 @@
 
     <base-button :type="submit">Send link</base-button>
   </form>
+
+  <teleport to="body" v-if="loading">
+    <base-loader></base-loader>
+  </teleport>
 </template>
 
 <script>
-import { sendPasswordResetEmail } from 'firebase/auth'
-import { auth } from '../../firebase'
+import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
 
 export default {
   data() {
     return {
+      loading: false,
       error: false,
       warning: `<span class="warning">Invalid e-mail!</span>`
     }
+  },
+  computed: {
+    ...mapStores(useAuthStore)
   },
   methods: {
     resetError() {
@@ -54,8 +62,13 @@ export default {
       }
 
       try {
-        const response = await sendPasswordResetEmail(auth, enteredEmail)
-      } catch {
+        this.loading = true
+        await this.authStore.recover({ login: enteredEmail })
+
+        this.$router.replace('/login')
+        this.loading = false
+      } catch (err) {
+        this.loading = false
         this.error = true
       }
 
