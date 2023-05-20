@@ -13,12 +13,11 @@
 
 <style scoped>
 .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
   width: 80px;
   height: 80px;
-  transform: translate(-50%, -50%);
 }
 
 .loader div {

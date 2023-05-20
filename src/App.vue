@@ -16,6 +16,11 @@ export default {
   components: {
     'the-header': TheHeader,
     'the-footer': TheFooter
+  },
+  computed: {
+    currentRouteName() {
+      window.scrollTo(0, 0)
+    }
   }
 }
 </script>

@@ -26,10 +26,7 @@ import { useAuthStore } from '../../stores/auth'
 
 export default {
   computed: {
-    ...mapStores(useAuthStore),
-    currentRouteName() {
-      return this.$route.name
-    }
+    ...mapStores(useAuthStore)
   },
   methods: {
     logout() {
