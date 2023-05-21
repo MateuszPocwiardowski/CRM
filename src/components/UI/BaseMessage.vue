@@ -3,10 +3,11 @@
     <p class="title">{{ title }}</p>
     <p class="message">{{ message }}</p>
     <div class="share">
-      <div class="likes-container">
-        <font-awesome-icon icon="fa-solid fa-heart" />
+      <button class="likes-container" @click="likeMessage">
+        <font-awesome-icon icon="fa-solid fa-heart" :class="{ liked: likedByUser }" />
         <span>{{ likes }}</span>
-      </div>
+      </button>
+
       <div class="comments-container">
         <font-awesome-icon icon="fa-solid fa-comment" />
         <span>{{ comments.length }}</span>
@@ -17,7 +18,17 @@
 
 <script>
 export default {
-  props: ['author', 'title', 'message', 'likes', 'comments']
+  props: ['author', 'title', 'message', 'likes', 'comments'],
+  data() {
+    return {
+      likedByUser: false
+    }
+  },
+  methods: {
+    likeMessage() {
+      this.likedByUser = !this.likedByUser
+    }
+  }
 }
 </script>
 
@@ -28,6 +39,8 @@ export default {
   flex-direction: column;
   gap: 0.5rem;
   border: 1px solid var(--colour-light-grey);
+  border-radius: var(--input-border-radius);
+  -webkit-border-radius: var(--input-border-radius);
   padding: 1rem;
 }
 
@@ -52,7 +65,19 @@ export default {
   gap: 0.25rem;
 }
 
-.likes-container svg {
+.likes-container {
+  border: none;
+  background: none;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.likes-container svg,
+.comments-container svg {
+  color: var(--colour-light-grey);
+}
+
+.likes-container svg.liked {
   color: var(--colour-red);
 }
 </style>

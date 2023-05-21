@@ -5,9 +5,12 @@
         <div class="nav-container">
           <nav class="nav">
             <base-logo></base-logo>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
-            <RouterLink to="/login">Login</RouterLink>
+            <RouterLink to="/" v-if="authStore.isLoggedIn">Dashboard</RouterLink>
+            <RouterLink to="/login" v-if="authStore.isLoggedIn" @click="logout" class="logout-btn">
+              Logout
+            </RouterLink>
+
+            <RouterLink to="/login" v-if="!authStore.isLoggedIn">Login</RouterLink>
           </nav>
           <div class="social-media">
             <a
@@ -41,10 +44,22 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
+import { auth } from '../../firebase'
+
 export default {
   data() {
     return {
       currentYear: new Date().getFullYear()
+    }
+  },
+  computed: {
+    ...mapStores(useAuthStore)
+  },
+  methods: {
+    logout() {
+      this.authStore.logout()
     }
   }
 }

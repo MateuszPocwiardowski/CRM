@@ -20,7 +20,6 @@ export default {
   background-color: var(--colour-green);
   border-radius: 2rem;
   cursor: pointer;
-  text-transform: uppercase;
 }
 
 .button:hover {

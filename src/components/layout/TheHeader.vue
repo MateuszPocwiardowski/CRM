@@ -5,9 +5,10 @@
 
       <nav v-if="authStore.isLoggedIn" class="nav">
         <RouterLink to="/">Dashboard</RouterLink>
-        <!-- <RouterLink to="/about">About</RouterLink> -->
+
         <RouterLink to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
       </nav>
+
       <nav v-else class="nav">
         <RouterLink to="/login">Login</RouterLink>
       </nav>

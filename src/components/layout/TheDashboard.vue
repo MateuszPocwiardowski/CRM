@@ -4,7 +4,7 @@
       <new-message></new-message>
       <div class="messages">
         <base-message
-          v-for="entry in dummyData"
+          v-for="entry in messagesStore.dummyData"
           :title="entry.title"
           :message="entry.message"
           :likes="entry.likes"
@@ -17,55 +17,18 @@
 </template>
 
 <script>
-import TheNewMessage from '../messages/TheNewMessage.vue'
+import { mapStores } from 'pinia'
+import TheNewMessage from '../messages/TheNewMessageForm.vue'
 import BaseMessage from '../UI/BaseMessage.vue'
+import { useMessagesStore } from '../../stores/messages'
 
 export default {
   components: {
     'new-message': TheNewMessage,
     'base-message': BaseMessage
   },
-  data() {
-    return {
-      dummyData: [
-        {
-          author: 'John Doe',
-          title: 'Traffic Update',
-          message: 'Heavy traffic on Main Street. Avoid if possible.',
-          likes: 15,
-          comments: [
-            {
-              author: 'Jane Smith',
-              message: 'Thanks for the heads-up!'
-            },
-            {
-              author: 'Mike Johnson',
-              message: 'Any alternate routes?'
-            }
-          ]
-        },
-        {
-          author: 'Sarah Thompson',
-          title: 'Public Transportation Strike',
-          message: 'Bus and train services will be suspended tomorrow due to a strike.',
-          likes: 8,
-          comments: [
-            {
-              author: 'David Lee',
-              message: 'This is going to be a huge inconvenience.'
-            },
-            {
-              author: 'Emily Brown',
-              message: 'Is there any information about when the services will resume?'
-            },
-            {
-              author: 'Mike Johnson',
-              message: 'Any alternate routes?'
-            }
-          ]
-        }
-      ]
-    }
+  computed: {
+    ...mapStores(useMessagesStore)
   }
 }
 </script>
