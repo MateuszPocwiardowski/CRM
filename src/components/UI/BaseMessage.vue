@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <img class="img" src="author.img" alt="author.altText" />
     <p class="title">{{ title }}</p>
     <p class="message">{{ message }}</p>
     <div class="share">
