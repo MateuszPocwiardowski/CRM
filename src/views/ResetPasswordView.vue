@@ -1,6 +1,6 @@
 <template>
-  <main class="main">
-    <TheResetPasswordForm></TheResetPasswordForm>
+  <main>
+    <reset-password-form></reset-password-form>
   </main>
 </template>
 
@@ -9,7 +9,7 @@ import TheResetPasswordForm from '../components/layout/TheResetPasswordForm.vue'
 
 export default {
   components: {
-    TheResetPasswordForm
+    'reset-password-form': TheResetPasswordForm
   }
 }
 </script>

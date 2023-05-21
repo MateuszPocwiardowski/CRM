@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <base-wrapper>
+    <base-wrapper type="row">
       <div class="footer-inner">
         <div class="nav-container">
           <nav class="nav">

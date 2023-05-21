@@ -1,16 +1,11 @@
 <template>
   <header class="header">
-    <base-wrapper>
-      <RouterLink to="/" class="logo">
-        <h1>
-          Vue
-          <div class="logo-green">.js</div>
-        </h1>
-      </RouterLink>
+    <base-wrapper type="row">
+      <base-logo class="logo"></base-logo>
 
       <nav v-if="authStore.isLoggedIn" class="nav">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Dashboard</RouterLink>
+        <!-- <RouterLink to="/about">About</RouterLink> -->
         <RouterLink to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
       </nav>
       <nav v-else class="nav">

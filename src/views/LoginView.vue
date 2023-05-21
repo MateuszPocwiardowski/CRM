@@ -1,6 +1,6 @@
 <template>
-  <main class="main">
-    <TheLoginForm></TheLoginForm>
+  <main>
+    <login-form></login-form>
   </main>
 </template>
 
@@ -9,7 +9,7 @@ import TheLoginForm from '../components/layout/TheLoginForm.vue'
 
 export default {
   components: {
-    TheLoginForm
+    'login-form': TheLoginForm
   }
 }
 </script>
