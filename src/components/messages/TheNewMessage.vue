@@ -58,6 +58,8 @@ export default {
   border: none;
   padding: 1rem;
   border: 1px solid var(--colour-light-grey);
+  -webkit-border-radius: 0;
+  border-radius: 0;
   width: 100%;
 }
 
