@@ -18,6 +18,7 @@
 
 <script>
 import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
 
 export default {
@@ -27,6 +28,9 @@ export default {
       error: false,
       warning: `<span class="warning">Invalid title or message!</span>`
     }
+  },
+  computed: {
+    ...mapStores(useAuthStore, useMessagesStore)
   },
   methods: {
     resetError() {
@@ -44,8 +48,13 @@ export default {
 
       try {
         this.loading = true
-        this.messagesStore.addNewMessage({ title: enteredTitle, message: enteredMessage })
+        this.messagesStore.addNewMessage({
+          author: this.authStore.userX,
+          title: enteredTitle,
+          message: enteredMessage
+        })
 
+        this.messagesStore.loadMessages()
         this.$router.replace('/')
         this.loading = false
       } catch (err) {
@@ -53,9 +62,6 @@ export default {
         this.error = true
       }
     }
-  },
-  computed: {
-    ...mapStores(useMessagesStore)
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <form class="form" @submit.prevent="submit">
     <div class="title-wrapper">
-      <h2>Hello!</h2>
-      <h4>Welcome back you've been missed!</h4>
+      <h2>Register</h2>
+      <h4>Register new employee using this form.</h4>
     </div>
 
     <div class="form-control">
@@ -36,9 +36,7 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <RouterLink class="link" to="/reset-password">Forgot password?</RouterLink>
-
-    <base-button :type="submit" v-if="!loading"> Login </base-button>
+    <base-button :type="submit" v-if="!loading"> Register </base-button>
     <base-loader v-if="loading"></base-loader>
   </form>
 </template>
@@ -52,7 +50,7 @@ export default {
     return {
       loading: false,
       error: false,
-      warning: `<span class="warning">Invalid username or password!</span>`
+      warning: `<span class="warning">Invalid e-mail or password!</span>`
     }
   },
   computed: {
@@ -74,7 +72,7 @@ export default {
 
       try {
         this.loading = true
-        await this.authStore.login({ login: enteredEmail, password: enteredPassword })
+        await this.authStore.createUser({ login: enteredEmail, password: enteredPassword })
 
         this.$router.replace('/')
         this.loading = false
@@ -152,12 +150,6 @@ export default {
 .form-control input:focus {
   border: none;
   outline: none;
-}
-
-.link {
-  align-self: flex-end;
-  font-size: 0.8rem;
-  text-decoration: underline;
 }
 
 button {

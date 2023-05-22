@@ -1,36 +1,57 @@
 import { defineStore } from 'pinia'
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword
+} from 'firebase/auth'
 import { auth } from '../firebase'
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      userX: 'Test',
+      emailX: ''
     }
   },
   actions: {
-    async login({ login, password }) {
+    async signIn({ login, password }) {
       try {
         const response = await signInWithEmailAndPassword(auth, login, password)
 
         if (response.user.accessToken) {
           this.isLoggedIn = true
         }
-      } catch {
-        throw new Error('Login failed')
+
+        if (response.user.email) {
+          this.emailX = response.user.email
+        }
+      } catch (error) {
+        throw new Error(error.message)
       }
     },
-    async recover({ login }) {
+
+    async sendPasswordReset({ login }) {
       try {
         const response = await sendPasswordResetEmail(auth, login)
-
-        console.log(response)
-      } catch {
-        throw new Error('Recovering password failed')
+      } catch (error) {
+        throw new Error(error.message)
       }
     },
+
     logout() {
       this.isLoggedIn = false
+    },
+
+    async createUser({ login, password }) {
+      console.log(login, password)
+      try {
+        const response = await createUserWithEmailAndPassword(auth, login, password)
+
+        console.log(response)
+      } catch (error) {
+        throw new Error(error.message)
+      }
     }
   }
 })

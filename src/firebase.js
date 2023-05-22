@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -7,8 +8,9 @@ const firebaseConfig = {
   projectId: 'mp-crm-5bac1'
 }
 
-initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
 
 const auth = getAuth()
+const db = getFirestore(app)
 
-export { auth }
+export { auth, db }

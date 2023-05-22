@@ -1,11 +1,8 @@
 <template>
   <form class="form" @submit.prevent="submit">
     <div class="title-wrapper">
-      <h2>Trouble with logging in?</h2>
-      <h4>
-        Enter your email address or username, and we'll send you a link to get back into your
-        account.
-      </h4>
+      <h2>Hello!</h2>
+      <h4>Welcome back you've been missed!</h4>
     </div>
 
     <div class="form-control">
@@ -23,9 +20,25 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <RouterLink class="link" to="/login">Back to login</RouterLink>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <div class="input-wrapper">
+        <font-awesome-icon icon="fa-solid fa-lock" />
+        <input
+          id="password"
+          type="password"
+          name="name"
+          placeholder="Type your password"
+          ref="password"
+          @focus="resetError"
+        />
+      </div>
+      <div v-html="warning" v-if="error"></div>
+    </div>
 
-    <base-button :type="submit" v-if="!loading">Send link</base-button>
+    <RouterLink class="link" to="/reset-password">Forgot password?</RouterLink>
+
+    <base-button :type="submit" v-if="!loading"> Login </base-button>
     <base-loader v-if="loading"></base-loader>
   </form>
 </template>
@@ -39,7 +52,7 @@ export default {
     return {
       loading: false,
       error: false,
-      warning: `<span class="warning">Invalid e-mail!</span>`
+      warning: `<span class="warning">Invalid e-mail or password!</span>`
     }
   },
   computed: {
@@ -51,8 +64,9 @@ export default {
     },
     async submit() {
       const enteredEmail = this.$refs.email.value
+      const enteredPassword = this.$refs.password.value
 
-      if (enteredEmail.trim() === '') {
+      if (enteredEmail.trim() === '' || enteredPassword.trim() === '') {
         this.error = true
 
         return
@@ -60,9 +74,9 @@ export default {
 
       try {
         this.loading = true
-        await this.authStore.sendPasswordReset({ login: enteredEmail })
+        await this.authStore.signIn({ login: enteredEmail, password: enteredPassword })
 
-        this.$router.replace('/login')
+        this.$router.replace('/')
         this.loading = false
       } catch (err) {
         this.loading = false
@@ -70,6 +84,7 @@ export default {
       }
 
       this.$refs.email.value = ''
+      this.$refs.password.value = ''
     }
   }
 }

@@ -1,38 +1,74 @@
 <template>
   <div class="container">
-    <p class="title">{{ title }}</p>
+    <div class="heading">
+      <p class="title">{{ title }}</p>
+
+      <p class="date-time" v-if="date">
+        {{ new Date(date.seconds * 1000).toLocaleString() }}
+      </p>
+
+      <p class="author">{{ author }}</p>
+    </div>
+
     <p class="message">{{ message }}</p>
+
     <div class="share">
-      <button class="likes-container" @click="likeMessage">
-        <font-awesome-icon icon="fa-solid fa-heart" :class="{ liked: likedByUser }" />
-        <span>{{ likes }}</span>
+      <button class="likes-container" @click="like">
+        <font-awesome-icon
+          icon="fa-solid fa-heart"
+          :class="{ liked: likes.includes(authStore.userX) }"
+        />
+        <span>{{ likes.length }}</span>
       </button>
 
       <div class="comments-container">
         <font-awesome-icon icon="fa-solid fa-comment" />
         <span>{{ comments.length }}</span>
       </div>
+
+      <button class="trash-container" @click="remove" v-if="author === authStore.userX">
+        <font-awesome-icon icon="fa-solid fa-trash" />
+      </button>
     </div>
   </div>
+  <base-loader v-if="loading"></base-loader>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
+import { useMessagesStore } from '../../stores/messages'
+
 export default {
-  props: ['author', 'title', 'message', 'likes', 'comments'],
+  props: ['id', 'date', 'author', 'title', 'message', 'likes', 'comments'],
+  computed: {
+    ...mapStores(useAuthStore, useMessagesStore)
+  },
   data() {
     return {
-      likedByUser: false
+      loading: false
     }
   },
   methods: {
-    likeMessage() {
-      this.likedByUser = !this.likedByUser
+    like() {
+      if (this.likes.includes(this.authStore.userX)) {
+        this.messagesStore.unlikeMessage({ id: this.id, user: this.authStore.userX })
+      } else {
+        this.messagesStore.likeMessage({ id: this.id, user: this.authStore.userX })
+      }
+
+      this.messagesStore.loadMessages()
+    },
+
+    remove() {
+      this.messagesStore.removeMessage({ id: this.id })
+      this.messagesStore.loadMessages()
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 100%;
   display: flex;
@@ -44,12 +80,27 @@ export default {
   padding: 1rem;
 }
 
-.img {
-  display: none;
+.heading {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.heading > * {
+  flex-basis: 50%;
 }
 
 .title {
   font-weight: 600;
+}
+
+.date-time {
+  text-align: right;
+  color: var(--colour-light-grey);
+}
+
+.author {
+  color: var(--colour-light-grey);
 }
 
 .share {
@@ -65,15 +116,22 @@ export default {
   gap: 0.25rem;
 }
 
-.likes-container {
+.likes-container,
+.trash-container {
   border: none;
   background: none;
   font-size: inherit;
   cursor: pointer;
 }
 
+.likes-container span,
+.comments-container span {
+  color: inherit;
+}
+
 .likes-container svg,
-.comments-container svg {
+.comments-container svg,
+.trash-container svg {
   color: var(--colour-light-grey);
 }
 
