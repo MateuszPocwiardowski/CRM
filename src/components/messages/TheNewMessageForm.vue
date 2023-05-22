@@ -10,7 +10,9 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <base-button :type="submit" class="button" v-if="!loading">Publish</base-button>
+    <base-button variant="primary" :type="submit" class="button" v-if="!loading"
+      >Publish</base-button
+    >
 
     <base-loader v-if="loading"></base-loader>
   </form>
@@ -49,7 +51,7 @@ export default {
       try {
         this.loading = true
         this.messagesStore.addNewMessage({
-          author: this.authStore.userX,
+          author: this.authStore.userName,
           title: enteredTitle,
           message: enteredMessage
         })

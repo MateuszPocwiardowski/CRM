@@ -36,7 +36,7 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <base-button :type="submit" v-if="!loading"> Register </base-button>
+    <base-button variant="primary" :type="submit" v-if="!loading"> Register </base-button>
     <base-loader v-if="loading"></base-loader>
   </form>
 </template>

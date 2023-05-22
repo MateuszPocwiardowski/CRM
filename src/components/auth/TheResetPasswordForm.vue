@@ -25,7 +25,7 @@
 
     <RouterLink class="link" to="/login">Back to login</RouterLink>
 
-    <base-button :type="submit" v-if="!loading">Send link</base-button>
+    <base-button variant="primary" :type="submit" v-if="!loading">Send link</base-button>
     <base-loader v-if="loading"></base-loader>
   </form>
 </template>

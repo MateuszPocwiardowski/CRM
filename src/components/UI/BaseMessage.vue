@@ -13,22 +13,22 @@
     <p class="message">{{ message }}</p>
 
     <div class="share">
-      <button class="likes-container" @click="like">
+      <base-button variant="secondary" @click="like">
         <font-awesome-icon
           icon="fa-solid fa-heart"
-          :class="{ liked: likes.includes(authStore.userX) }"
+          :class="{ liked: likes.includes(authStore.userName) }"
         />
         <span>{{ likes.length }}</span>
-      </button>
+      </base-button>
 
-      <div class="comments-container">
+      <base-button variant="secondary" @click="comment">
         <font-awesome-icon icon="fa-solid fa-comment" />
         <span>{{ comments.length }}</span>
-      </div>
+      </base-button>
 
-      <button class="trash-container" @click="remove" v-if="author === authStore.userX">
+      <base-button variant="secondary" @click="remove" v-if="author === authStore.userName">
         <font-awesome-icon icon="fa-solid fa-trash" />
-      </button>
+      </base-button>
     </div>
   </div>
   <base-loader v-if="loading"></base-loader>
@@ -51,10 +51,10 @@ export default {
   },
   methods: {
     like() {
-      if (this.likes.includes(this.authStore.userX)) {
-        this.messagesStore.unlikeMessage({ id: this.id, user: this.authStore.userX })
+      if (this.likes.includes(this.authStore.userName)) {
+        this.messagesStore.unlikeMessage({ id: this.id, user: this.authStore.userName })
       } else {
-        this.messagesStore.likeMessage({ id: this.id, user: this.authStore.userX })
+        this.messagesStore.likeMessage({ id: this.id, user: this.authStore.userName })
       }
 
       this.messagesStore.loadMessages()
@@ -85,16 +85,13 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
-.heading > * {
-  flex-basis: 50%;
-}
-
 .title {
+  flex-basis: 50%;
   font-weight: 600;
 }
 
 .date-time {
+  flex-basis: 50%;
   text-align: right;
   color: var(--colour-light-grey);
 }
@@ -106,36 +103,14 @@ export default {
 .share {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
-}
-
-.likes-container,
-.comments-container {
-  display: flex;
-  align-items: center;
   gap: 0.25rem;
 }
 
-.likes-container,
-.trash-container {
-  border: none;
-  background: none;
-  font-size: inherit;
-  cursor: pointer;
-}
-
-.likes-container span,
-.comments-container span {
-  color: inherit;
-}
-
-.likes-container svg,
-.comments-container svg,
-.trash-container svg {
+.share svg {
   color: var(--colour-light-grey);
 }
 
-.likes-container svg.liked {
+.share svg.liked {
   color: var(--colour-red);
 }
 </style>

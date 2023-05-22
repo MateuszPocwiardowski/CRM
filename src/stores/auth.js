@@ -10,8 +10,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => {
     return {
       isLoggedIn: false,
-      userX: 'Test',
-      emailX: ''
+      userName: '',
+      userEmail: ''
     }
   },
   actions: {
@@ -24,7 +24,16 @@ export const useAuthStore = defineStore('auth', {
         }
 
         if (response.user.email) {
-          this.emailX = response.user.email
+          this.userEmail = response.user.email
+
+          console.log(response.user.email)
+
+          const [name, surname] = response.user.email.split('@')[0].split('.')
+
+          console.log(name, surname)
+          this.userName = `${name.charAt(0).toUpperCase() + name.slice(1)} ${surname.charAt(0).toUpperCase() + surname.slice(1)}`
+
+          console.log(this.userName)
         }
       } catch (error) {
         throw new Error(error.message)

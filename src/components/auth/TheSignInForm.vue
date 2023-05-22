@@ -38,7 +38,7 @@
 
     <RouterLink class="link" to="/reset-password">Forgot password?</RouterLink>
 
-    <base-button :type="submit" v-if="!loading"> Login </base-button>
+    <base-button variant="primary" :type="submit" v-if="!loading"> Login </base-button>
     <base-loader v-if="loading"></base-loader>
   </form>
 </template>
