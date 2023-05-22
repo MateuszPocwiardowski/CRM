@@ -18,12 +18,12 @@
           icon="fa-solid fa-heart"
           :class="{ liked: likes.includes(authStore.userName) }"
         />
-        <span>{{ likes.length }}</span>
+        {{ likes.length }}
       </base-button>
 
       <base-button variant="secondary" @click="comment">
         <font-awesome-icon icon="fa-solid fa-comment" />
-        <span>{{ comments.length }}</span>
+        {{ comments.length }}
       </base-button>
 
       <base-button variant="secondary" @click="remove" v-if="author === authStore.userName">

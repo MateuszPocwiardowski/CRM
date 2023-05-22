@@ -16,7 +16,6 @@ export default {
   font-size: 1rem;
   font-weight: 600;
   border-radius: 2rem;
-  -webkit-text-fill-color: inherit;
   border: none;
   cursor: pointer;
 }
@@ -32,7 +31,8 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.25rem .5rem;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
   background: none;
 }
 
