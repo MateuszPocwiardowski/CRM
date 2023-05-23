@@ -76,7 +76,7 @@ export default {
         this.loading = true
         await this.authStore.signIn({ login: enteredEmail, password: enteredPassword })
 
-        this.$router.replace('/')
+        this.$router.replace('/dashboard')
         this.loading = false
       } catch (err) {
         this.loading = false

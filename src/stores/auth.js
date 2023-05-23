@@ -25,15 +25,11 @@ export const useAuthStore = defineStore('auth', {
 
         if (response.user.email) {
           this.userEmail = response.user.email
-
-          console.log(response.user.email)
-
           const [name, surname] = response.user.email.split('@')[0].split('.')
 
-          console.log(name, surname)
-          this.userName = `${name.charAt(0).toUpperCase() + name.slice(1)} ${surname.charAt(0).toUpperCase() + surname.slice(1)}`
-
-          console.log(this.userName)
+          this.userName = `${name.charAt(0).toUpperCase() + name.slice(1)} ${
+            surname.charAt(0).toUpperCase() + surname.slice(1)
+          }`
         }
       } catch (error) {
         throw new Error(error.message)
@@ -42,7 +38,7 @@ export const useAuthStore = defineStore('auth', {
 
     async sendPasswordReset({ login }) {
       try {
-        const response = await sendPasswordResetEmail(auth, login)
+        await sendPasswordResetEmail(auth, login)
       } catch (error) {
         throw new Error(error.message)
       }
@@ -53,11 +49,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async createUser({ login, password }) {
-      console.log(login, password)
       try {
-        const response = await createUserWithEmailAndPassword(auth, login, password)
-
-        console.log(response)
+        await createUserWithEmailAndPassword(auth, login, password)
       } catch (error) {
         throw new Error(error.message)
       }

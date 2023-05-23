@@ -19,6 +19,7 @@ export const useMessagesStore = defineStore('messages', {
   state: () => {
     return {
       data: [],
+      message: {},
       dummyData: [
         {
           id: 1,
@@ -67,6 +68,15 @@ export const useMessagesStore = defineStore('messages', {
       try {
         const query = await getDocs(collection(db, 'messages'))
         this.data = query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      } catch (error) {
+        throw new Error(error.message)
+      }
+    },
+
+    async loadMessage({ id }) {
+      try {
+        const query = await getDoc(doc(db, 'messages', id))
+        this.message = { id, ...query.data() }
       } catch (error) {
         throw new Error(error.message)
       }

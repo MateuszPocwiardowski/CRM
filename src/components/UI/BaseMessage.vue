@@ -51,13 +51,20 @@ export default {
   },
   methods: {
     like() {
-      if (this.likes.includes(this.authStore.userName)) {
-        this.messagesStore.unlikeMessage({ id: this.id, user: this.authStore.userName })
+      const isMessageLiked = this.likes.includes(this.authStore.userName)
+      const messageData = { id: this.id, user: this.authStore.userName }
+
+      if (isMessageLiked) {
+        this.messagesStore.unlikeMessage(messageData)
       } else {
-        this.messagesStore.likeMessage({ id: this.id, user: this.authStore.userName })
+        this.messagesStore.likeMessage(messageData)
       }
 
       this.messagesStore.loadMessages()
+    },
+
+    comment() {
+      this.$router.push('/dashboard/' + this.id)
     },
 
     remove() {

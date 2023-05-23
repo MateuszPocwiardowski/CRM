@@ -4,6 +4,7 @@
       <new-message></new-message>
       <div class="messages">
         <base-message
+          v-if="!!messagesStore.data.length"
           v-for="entry in messagesStore.data"
           :id="entry.id"
           :date="entry.date"
@@ -38,7 +39,7 @@ export default {
   },
   computed: {
     ...mapStores(useMessagesStore)
-  },
+  }
 }
 </script>
 

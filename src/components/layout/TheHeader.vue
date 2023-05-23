@@ -4,7 +4,7 @@
       <base-logo class="logo"></base-logo>
 
       <nav v-if="authStore.isLoggedIn" class="nav">
-        <RouterLink to="/">Dashboard</RouterLink>
+        <RouterLink to="/dashboard">Dashboard</RouterLink>
 
         <RouterLink to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
       </nav>

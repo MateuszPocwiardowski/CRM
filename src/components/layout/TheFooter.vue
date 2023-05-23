@@ -5,7 +5,7 @@
         <div class="nav-container">
           <nav class="nav">
             <base-logo></base-logo>
-            <RouterLink to="/" v-if="authStore.isLoggedIn">Dashboard</RouterLink>
+            <RouterLink to="/dashboard" v-if="authStore.isLoggedIn">Dashboard</RouterLink>
             <RouterLink to="/login" v-if="authStore.isLoggedIn" @click="logout" class="logout-btn">
               Logout
             </RouterLink>

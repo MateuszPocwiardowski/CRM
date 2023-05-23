@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/" class="logo">
+  <RouterLink to="/dashboard" class="logo">
       Vue<div class="logo-green">.js</div>
   </RouterLink>
 </template>
