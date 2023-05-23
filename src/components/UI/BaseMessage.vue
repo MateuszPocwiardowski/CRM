@@ -16,20 +16,22 @@
       <base-button variant="secondary" @click="like">
         <font-awesome-icon
           icon="fa-solid fa-heart"
-          :class="{ liked: likes.includes(authStore.userName) }"
+          :class="{ liked: likes?.includes(authStore.userName) }"
         />
-        {{ likes.length }}
+        {{ likes?.length }}
       </base-button>
 
       <base-button variant="secondary" @click="comment">
         <font-awesome-icon icon="fa-solid fa-comment" />
-        {{ comments.length }}
+        {{ comments?.length }}
       </base-button>
 
       <base-button variant="secondary" @click="remove" v-if="author === authStore.userName">
         <font-awesome-icon icon="fa-solid fa-trash" />
       </base-button>
     </div>
+
+    <comments :id="id" :comments="comments"></comments>
   </div>
   <base-loader v-if="loading"></base-loader>
 </template>
@@ -39,8 +41,13 @@ import { mapStores } from 'pinia'
 import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
 
+import TheComments from '../messages/TheComments.vue'
+
 export default {
   props: ['id', 'date', 'author', 'title', 'message', 'likes', 'comments'],
+  components: {
+    comments: TheComments
+  },
   computed: {
     ...mapStores(useAuthStore, useMessagesStore)
   },
@@ -63,9 +70,7 @@ export default {
       this.messagesStore.loadMessages()
     },
 
-    comment() {
-      this.$router.push('/dashboard/' + this.id)
-    },
+    comment() {},
 
     remove() {
       this.messagesStore.removeMessage({ id: this.id })

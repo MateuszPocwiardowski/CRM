@@ -3,13 +3,10 @@ import {
   collection,
   doc,
   addDoc,
-  getDoc,
   getDocs,
   updateDoc,
   arrayUnion,
   arrayRemove,
-  query,
-  where,
   deleteDoc,
   Timestamp
 } from 'firebase/firestore'
@@ -19,7 +16,6 @@ export const useMessagesStore = defineStore('messages', {
   state: () => {
     return {
       data: [],
-      message: {},
       dummyData: [
         {
           id: 1,
@@ -73,15 +69,6 @@ export const useMessagesStore = defineStore('messages', {
       }
     },
 
-    async loadMessage({ id }) {
-      try {
-        const query = await getDoc(doc(db, 'messages', id))
-        this.message = { id, ...query.data() }
-      } catch (error) {
-        throw new Error(error.message)
-      }
-    },
-
     async addNewMessage({ author, title, message }) {
       try {
         await addDoc(collection(db, 'messages'), {
@@ -119,6 +106,16 @@ export const useMessagesStore = defineStore('messages', {
       try {
         await updateDoc(doc(db, 'messages', id), {
           likes: arrayRemove(user)
+        })
+      } catch (error) {
+        throw new Error(error.message)
+      }
+    },
+
+    async addComment({ id, message, user }) {
+      try {
+        await updateDoc(doc(db, 'messages', id), {
+          comments: arrayUnion({ author: user, message })
         })
       } catch (error) {
         throw new Error(error.message)

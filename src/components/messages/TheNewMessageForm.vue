@@ -108,7 +108,6 @@ export default {
 
 .button {
   align-self: flex-end;
-  text-transform: none;
   margin-bottom: 2rem;
 }
 </style>
