@@ -23,7 +23,7 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <RouterLink class="link" to="/login">Back to login</RouterLink>
+    <router-link class="link" :to="{ name: 'sign-in' }">Back to sign in</router-link>
 
     <base-button variant="primary" :type="submit" v-if="!loading">Send link</base-button>
     <base-loader v-if="loading"></base-loader>
@@ -62,7 +62,7 @@ export default {
         this.loading = true
         await this.authStore.sendPasswordReset({ login: enteredEmail })
 
-        this.$router.replace('/login')
+        this.$router.replace({ name: 'singIn' })
         this.loading = false
       } catch (err) {
         this.loading = false

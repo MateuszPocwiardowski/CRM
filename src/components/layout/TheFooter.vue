@@ -5,12 +5,21 @@
         <div class="nav-container">
           <nav class="nav">
             <base-logo></base-logo>
-            <RouterLink to="/dashboard" v-if="authStore.isLoggedIn">Dashboard</RouterLink>
-            <RouterLink to="/login" v-if="authStore.isLoggedIn" @click="logout" class="logout-btn">
-              Logout
-            </RouterLink>
 
-            <RouterLink to="/login" v-if="!authStore.isLoggedIn">Login</RouterLink>
+            <router-link :to="{ name: 'dashboard' }" v-if="authStore.isLoggedIn">
+              Dashboard
+            </router-link>
+
+            <router-link
+              :to="{ name: 'sign-in' }"
+              v-if="authStore.isLoggedIn"
+              @click="logout"
+              class="logout-btn"
+            >
+              Logout
+            </router-link>
+
+            <router-link :to="{ name: 'sign-in' }" v-if="!authStore.isLoggedIn">Login</router-link>
           </nav>
           <div class="social-media">
             <a

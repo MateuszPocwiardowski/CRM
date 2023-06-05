@@ -71,6 +71,8 @@ export default {
         this.loading = false
         this.error = true
       }
+
+      this.$refs.comment.value = ''
     }
   }
 }
@@ -103,7 +105,6 @@ export default {
 
 .form-control input {
   width: 100%;
-  font-family: inherit;
   font-weight: 1rem;
   font-size: 1rem;
   color: inherit;

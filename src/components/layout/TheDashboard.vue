@@ -1,7 +1,14 @@
 <template>
   <div class="dashboard">
     <base-wrapper type="column">
+      <div className="title" v-if="authStore.userName">
+        <span>Hello, </span>
+        <span className="user-name">{{ authStore.userName }}</span>
+        <span>!</span>
+      </div>
+
       <new-message></new-message>
+      
       <div class="messages">
         <base-message
           v-if="!!messagesStore.data.length"
@@ -24,6 +31,7 @@
 
 <script>
 import { mapStores } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
 
 import TheNewMessage from '../messages/TheNewMessageForm.vue'
@@ -38,7 +46,7 @@ export default {
     this.messagesStore.loadMessages()
   },
   computed: {
-    ...mapStores(useMessagesStore)
+    ...mapStores(useAuthStore, useMessagesStore)
   }
 }
 </script>
@@ -53,7 +61,12 @@ export default {
 
 .title {
   text-align: center;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.user-name {
+  font-weight: 500;
 }
 
 .messages {

@@ -57,7 +57,7 @@ export default {
         })
 
         this.messagesStore.loadMessages()
-        this.$router.replace('/dashboard')
+        this.$router.replace({ name: 'dashboard' })
         this.loading = false
       } catch (err) {
         this.loading = false

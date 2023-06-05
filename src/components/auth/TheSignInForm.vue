@@ -36,7 +36,7 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <RouterLink class="link" to="/reset-password">Forgot password?</RouterLink>
+    <router-link class="link" :to="{ name: 'reset-password' }">Forgot password?</router-link>
 
     <base-button variant="primary" :type="submit" v-if="!loading"> Login </base-button>
     <base-loader v-if="loading"></base-loader>
@@ -76,7 +76,7 @@ export default {
         this.loading = true
         await this.authStore.signIn({ login: enteredEmail, password: enteredPassword })
 
-        this.$router.replace('/dashboard')
+        this.$router.replace({ name: 'dashboard' })
         this.loading = false
       } catch (err) {
         this.loading = false

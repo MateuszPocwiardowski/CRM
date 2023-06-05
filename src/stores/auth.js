@@ -10,20 +10,30 @@ export const useAuthStore = defineStore('auth', {
   state: () => {
     return {
       isLoggedIn: false,
-      userName: '',
-      userEmail: ''
+      userName: null,
+      userEmail: null,
+      token: null,
+      tokenExiration: null
     }
   },
   actions: {
     async signIn({ login, password }) {
       try {
         const response = await signInWithEmailAndPassword(auth, login, password)
+        console.log(response)
 
-        if (response.user.accessToken) {
+        if (response?.user) {
           this.isLoggedIn = true
+          this.token = response.user?.accessToken
+          this.tokenExiration = new Date(Date.now() + response?._tokenResponse?.expiresIn * 1000)
+
+          console.log(new Date())
+          console.log(this.tokenExiration)
+          // TODO: Check if token expired then logout user and redirect to login form
+          console.log(new Date() > this.tokenExiration)
         }
 
-        if (response.user.email) {
+        if (response?.user?.email) {
           this.userEmail = response.user.email
           const [name, surname] = response.user.email.split('@')[0].split('.')
 
@@ -46,6 +56,10 @@ export const useAuthStore = defineStore('auth', {
 
     logout() {
       this.isLoggedIn = false
+      this.userName = null
+      this.userEmail = null
+      this.token = null
+      this.tokenExiration = null
     },
 
     async createUser({ login, password }) {

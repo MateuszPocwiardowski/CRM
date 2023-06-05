@@ -1,8 +1,8 @@
 <template>
   <form class="form" @submit.prevent="submit">
     <div class="title-wrapper">
-      <h2>Register</h2>
-      <h4>Register new employee using this form.</h4>
+      <h2>Sign up</h2>
+      <h4>Sign up new employee using this form.</h4>
     </div>
 
     <div class="form-control">
@@ -74,7 +74,7 @@ export default {
         this.loading = true
         await this.authStore.createUser({ login: enteredEmail, password: enteredPassword })
 
-        this.$router.replace('/dashboard')
+        this.$router.replace({ name: 'dashboard' })
         this.loading = false
       } catch (err) {
         this.loading = false

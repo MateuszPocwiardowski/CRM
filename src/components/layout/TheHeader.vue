@@ -4,13 +4,15 @@
       <base-logo class="logo"></base-logo>
 
       <nav v-if="authStore.isLoggedIn" class="nav">
-        <RouterLink to="/dashboard">Dashboard</RouterLink>
+        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
 
-        <RouterLink to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
+        <router-link :to="{ name: 'sign-in' }" @click="logout" class="logout-btn">
+          Logout
+        </router-link>
       </nav>
 
       <nav v-else class="nav">
-        <RouterLink to="/login">Login</RouterLink>
+        <router-link :to="{ name: 'sign-in' }">Sign in</router-link>
       </nav>
     </base-wrapper>
   </header>
