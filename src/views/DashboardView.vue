@@ -1,5 +1,5 @@
 <template>
-  <main class="context">
+  <main>
     <dashboard></dashboard>
   </main>
 </template>

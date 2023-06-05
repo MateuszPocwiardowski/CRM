@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import {
   signInWithEmailAndPassword,
+  signOut,
   sendPasswordResetEmail,
   createUserWithEmailAndPassword
 } from 'firebase/auth'
@@ -13,7 +14,7 @@ export const useAuthStore = defineStore('auth', {
       userName: null,
       userEmail: null,
       token: null,
-      tokenExiration: null
+      tokenExpiration: null
     }
   },
   actions: {
@@ -23,14 +24,20 @@ export const useAuthStore = defineStore('auth', {
         console.log(response)
 
         if (response?.user) {
+          const token = response.user?.accessToken
+          const tokenExpiration = new Date(Date.now() + response?._tokenResponse?.expiresIn * 1000)
+
           this.isLoggedIn = true
-          this.token = response.user?.accessToken
-          this.tokenExiration = new Date(Date.now() + response?._tokenResponse?.expiresIn * 1000)
+          this.token = token
+          this.tokenExpiration = tokenExpiration
+
+          localStorage.setItem('token', token)
+          localStorage.setItem('tokenExpiration', tokenExpiration)
 
           console.log(new Date())
-          console.log(this.tokenExiration)
+          console.log(this.tokenExpiration)
           // TODO: Check if token expired then logout user and redirect to login form
-          console.log(new Date() > this.tokenExiration)
+          console.log(new Date() > this.tokenExpiration)
         }
 
         if (response?.user?.email) {
@@ -46,6 +53,13 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    async tryLogin() {
+      const token = localStorage.getItem('token')
+      const tokenExpiration = localStorage.getItem('tokenExpiration')
+
+      console.log('token: ', token, ' tokenExpiration: ', tokenExpiration)
+    },
+
     async sendPasswordReset({ login }) {
       try {
         await sendPasswordResetEmail(auth, login)
@@ -54,12 +68,21 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    logout() {
-      this.isLoggedIn = false
-      this.userName = null
-      this.userEmail = null
-      this.token = null
-      this.tokenExiration = null
+    async logout() {
+      try {
+        await signOut(auth)
+
+        this.isLoggedIn = false
+        this.userName = null
+        this.userEmail = null
+        this.token = null
+        this.tokenExpiration = null
+
+        localStorage.removeItem('token')
+        localStorage.removeItem('tokenExpiration')
+      } catch (erorr) {
+        throw new Error(error.message)
+      }
     },
 
     async createUser({ login, password }) {

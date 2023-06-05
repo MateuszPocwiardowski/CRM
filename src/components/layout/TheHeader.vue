@@ -1,21 +1,19 @@
 <template>
-  <header class="header">
-    <base-wrapper type="row">
-      <base-logo class="logo"></base-logo>
+  <base-wrapper type="row">
+    <base-logo class="logo"></base-logo>
 
-      <nav v-if="authStore.isLoggedIn" class="nav">
-        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
+    <nav v-if="authStore.isLoggedIn" class="nav">
+      <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
 
-        <router-link :to="{ name: 'sign-in' }" @click="logout" class="logout-btn">
-          Logout
-        </router-link>
-      </nav>
+      <router-link :to="{ name: 'sign-in' }" @click="logout" class="logout-btn">
+        Logout
+      </router-link>
+    </nav>
 
-      <nav v-else class="nav">
-        <router-link :to="{ name: 'sign-in' }">Sign in</router-link>
-      </nav>
-    </base-wrapper>
-  </header>
+    <nav v-else class="nav">
+      <router-link :to="{ name: 'sign-in' }">Login</router-link>
+    </nav>
+  </base-wrapper>
 </template>
 
 <script>
@@ -35,25 +33,8 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  line-height: 2.6;
-}
-
 .logo {
   font-size: 1rem;
-}
-
-.logo-green {
-  display: inline;
-  font-weight: inherit;
-  color: var(--colour-green);
-}
-
-.logo h1 {
-  font-size: inherit;
 }
 
 .nav {
@@ -61,10 +42,10 @@ export default {
 }
 
 .logo,
-.nav a,
-span {
+.nav a {
   padding: 0 1rem;
   font-weight: 600;
+  line-height: 2.6;
 }
 
 .nav a.router-link-active {

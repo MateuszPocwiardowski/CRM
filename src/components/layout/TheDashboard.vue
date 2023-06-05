@@ -1,32 +1,30 @@
 <template>
-  <div class="dashboard">
-    <base-wrapper type="column">
-      <div className="title" v-if="authStore.userName">
-        <span>Hello, </span>
-        <span className="user-name">{{ authStore.userName }}</span>
-        <span>!</span>
-      </div>
+  <base-wrapper type="column">
+    <div class="title" v-if="authStore.userName">
+      <span>Hello, </span>
+      <span class="user-name">{{ authStore.userName }}</span>
+      <span>!</span>
+    </div>
 
-      <new-message></new-message>
-      
-      <div class="messages">
-        <base-message
-          v-if="!!messagesStore.data.length"
-          v-for="entry in messagesStore.data"
-          :id="entry.id"
-          :date="entry.date"
-          :author="entry.author"
-          :title="entry.title"
-          :message="entry.message"
-          :likes="entry.likes"
-          :comments="entry.comments"
-        >
-        </base-message>
+    <new-message></new-message>
 
-        <p class="no-messages-text" v-if="!messagesStore.data.length">No messages yet.</p>
-      </div>
-    </base-wrapper>
-  </div>
+    <div class="messages">
+      <base-message
+        v-if="!!messagesStore.data.length"
+        v-for="entry in messagesStore.data"
+        :id="entry.id"
+        :date="entry.date"
+        :author="entry.author"
+        :title="entry.title"
+        :message="entry.message"
+        :likes="entry.likes"
+        :comments="entry.comments"
+      >
+      </base-message>
+
+      <p class="no-messages-text" v-if="!messagesStore.data.length">No messages yet.</p>
+    </div>
+  </base-wrapper>
 </template>
 
 <script>
@@ -52,13 +50,6 @@ export default {
 </script>
 
 <style scoped>
-.dashboard {
-  width: 100%;
-  display: flex;
-  align-content: flex-start;
-  justify-content: center;
-}
-
 .title {
   text-align: center;
   font-size: 1.5rem;

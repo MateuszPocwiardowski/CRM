@@ -23,7 +23,7 @@
       <div v-html="warning" v-if="error"></div>
     </div>
 
-    <router-link class="link" :to="{ name: 'sign-in' }">Back to sign in</router-link>
+    <router-link class="link" :to="{ name: 'sign-in' }">Back to login</router-link>
 
     <base-button variant="primary" :type="submit" v-if="!loading">Send link</base-button>
     <base-loader v-if="loading"></base-loader>

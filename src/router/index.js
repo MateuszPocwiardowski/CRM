@@ -49,7 +49,6 @@ const router = createRouter({
 
 router.beforeEach(function (to, from, next) {
   const store = useAuthStore()
-  console.log('to.meta.requiresAuth', to.meta.requiresAuth, 'store.isLoggedIn', store.isLoggedIn)
 
   if (to.meta.requiresAuth && store.isLoggedIn) {
     next()

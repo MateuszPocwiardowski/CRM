@@ -1,6 +1,11 @@
 <template>
-  <main>
+  <main class="main">
     <sign-in-form></sign-in-form>
+    <div class="simple-account">
+      <p>Example account:</p>
+      <p>Login: test.test.pl</p>
+      <p>Password: test123</p>
+    </div>
   </main>
 </template>
 
@@ -13,3 +18,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* TODO: Remove login and password to example user */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.simple-account {
+  text-align: center;
+}
+.simple-account p:first-child {
+  font-weight: 500;
+}
+</style>
