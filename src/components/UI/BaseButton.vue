@@ -14,7 +14,7 @@ export default {
 .button-primary,
 .button-secondary {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 2rem;
   border: none;
   cursor: pointer;

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import {
   signInWithEmailAndPassword,
+  onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
   createUserWithEmailAndPassword
@@ -11,53 +12,45 @@ export const useAuthStore = defineStore('auth', {
   state: () => {
     return {
       isLoggedIn: false,
-      userName: null,
-      userEmail: null,
-      token: null,
-      tokenExpiration: null
+      userName: ''
     }
   },
   actions: {
     async signIn({ login, password }) {
       try {
         const response = await signInWithEmailAndPassword(auth, login, password)
-        console.log(response)
 
         if (response?.user) {
-          const token = response.user?.accessToken
-          const tokenExpiration = new Date(Date.now() + response?._tokenResponse?.expiresIn * 1000)
-
           this.isLoggedIn = true
-          this.token = token
-          this.tokenExpiration = tokenExpiration
 
-          localStorage.setItem('token', token)
-          localStorage.setItem('tokenExpiration', tokenExpiration)
-
-          console.log(new Date())
-          console.log(this.tokenExpiration)
-          // TODO: Check if token expired then logout user and redirect to login form
-          console.log(new Date() > this.tokenExpiration)
-        }
-
-        if (response?.user?.email) {
-          this.userEmail = response.user.email
-          const [name, surname] = response.user.email.split('@')[0].split('.')
+          const [name, surname] = response.user?.email.split('@')[0].split('.')
 
           this.userName = `${name.charAt(0).toUpperCase() + name.slice(1)} ${
             surname.charAt(0).toUpperCase() + surname.slice(1)
           }`
         }
+        // TODO: Check if token expired then logout user and redirect to login form
+        // const tokenExpiration = new Date(Date.now() + response?._tokenResponse?.expiresIn * 1000)
+        // console.log(new Date())
+        // console.log(this.tokenExpiration)
+        // console.log(new Date() > this.tokenExpiration)
       } catch (error) {
         throw new Error(error.message)
       }
     },
 
     async tryLogin() {
-      const token = localStorage.getItem('token')
-      const tokenExpiration = localStorage.getItem('tokenExpiration')
-
-      console.log('token: ', token, ' tokenExpiration: ', tokenExpiration)
+      try {
+        await onAuthStateChanged(auth, (user) => {
+          if (user) {
+            this.isLoggedIn = true
+          } else {
+            this.isLoggedIn = false
+          }
+        })
+      } catch (error) {
+        throw new Error(error.message)
+      }
     },
 
     async sendPasswordReset({ login }) {
@@ -73,13 +66,7 @@ export const useAuthStore = defineStore('auth', {
         await signOut(auth)
 
         this.isLoggedIn = false
-        this.userName = null
-        this.userEmail = null
-        this.token = null
-        this.tokenExpiration = null
-
-        localStorage.removeItem('token')
-        localStorage.removeItem('tokenExpiration')
+        this.userName = ''
       } catch (erorr) {
         throw new Error(error.message)
       }

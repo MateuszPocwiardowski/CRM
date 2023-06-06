@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useAuthStore } from './stores/auth'
 import { RouterView } from 'vue-router'
 
 import TheHeader from './components/layout/TheHeader.vue'
@@ -18,12 +16,6 @@ export default {
   components: {
     'the-header': TheHeader,
     'the-footer': TheFooter
-  },
-  computed: {
-    ...mapStores(useAuthStore)
-  }, 
-  created() {
-    this.authStore.tryLogin()
   }
 }
 </script>

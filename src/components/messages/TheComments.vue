@@ -1,79 +1,25 @@
 <template>
   <base-wrapper type="column">
-    <hr class="divider" />
-
-    <div class="comments" v-if="!!comments?.length">
+    <div class="comments" v-if="comments?.length">
       <div class="comment" v-for="comment in comments">
         <p class="author">{{ comment.author }}</p>
         <p class="message">{{ comment.message }}</p>
       </div>
     </div>
 
+    <the-new-comment :id="id"></the-new-comment>
+
     <p class="no-comments" v-if="!comments?.length">No comments yet.</p>
-
-    <form class="form" @submit.prevent="submit">
-      <div class="form-control">
-        <input type="text" name="comment" placeholder="Comment" ref="comment" @focus="resetError" />
-        <div v-html="warning" v-if="error"></div>
-      </div>
-
-      <base-button variant="primary" :type="submit" class="button" v-if="!loading">
-        Publish
-      </base-button>
-
-      <base-loader v-if="loading"></base-loader>
-    </form>
   </base-wrapper>
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useAuthStore } from '../../stores/auth'
-import { useMessagesStore } from '../../stores/messages'
+import TheNewComment from './TheNewComment.vue'
 
 export default {
   props: ['id', 'comments'],
-  data() {
-    return {
-      loading: false,
-      error: false,
-      warning: `<span class="warning">Invalid title or message!</span>`
-    }
-  },
-  computed: {
-    ...mapStores(useAuthStore, useMessagesStore)
-  },
-  methods: {
-    resetError() {
-      this.error = false
-    },
-    submit() {
-      const enteredMessage = this.$refs.comment.value
-
-      if (enteredMessage.trim() === '') {
-        this.error = true
-
-        return
-      }
-
-      try {
-        this.loading = true
-
-        this.messagesStore.addComment({
-          id: this.id,
-          user: this.authStore.userName,
-          message: enteredMessage
-        })
-        this.messagesStore.loadMessages()
-
-        this.loading = false
-      } catch (err) {
-        this.loading = false
-        this.error = true
-      }
-
-      this.$refs.comment.value = ''
-    }
+  components: {
+    'the-new-comment': TheNewComment
   }
 }
 </script>
@@ -81,48 +27,6 @@ export default {
 <style scoped>
 .wrapper {
   gap: 0.5rem;
-}
-
-.divider {
-  width: 100%;
-  border-top: 1px solid var(--colour-light-grey);
-  border-bottom: none;
-}
-.form {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  gap: 1rem;
-}
-
-.form-control {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-control input {
-  width: 100%;
-  font-weight: 1rem;
-  font-size: 1rem;
-  color: inherit;
-  outline: none;
-  border: none;
-  padding: 0.5rem;
-  border: 1px solid var(--colour-light-grey);
-  border-radius: var(--input-border-radius);
-  -webkit-border-radius: var(--input-border-radius);
-}
-
-.form-control input::placeholder {
-  color: inherit;
-}
-
-.form-control input:active,
-.form-control input:focus {
-  outline: none;
 }
 
 .comments {

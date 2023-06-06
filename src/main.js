@@ -17,7 +17,8 @@ import {
   faLaptopCode,
   faHeart,
   faComment,
-  faTrash
+  faTrash,
+  faShare
 } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
@@ -26,7 +27,17 @@ import './main.css'
 const pinia = createPinia()
 const app = createApp(App)
 
-library.add(faUser, faLock, faLaptopCode, faLinkedin, faGithub, faHeart, faComment, faTrash)
+library.add(
+  faUser,
+  faLock,
+  faLaptopCode,
+  faLinkedin,
+  faGithub,
+  faHeart,
+  faComment,
+  faTrash,
+  faShare
+)
 
 app.component('base-wrapper', BaseWrapper)
 app.component('base-button', BaseButton)

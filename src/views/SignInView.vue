@@ -3,7 +3,7 @@
     <sign-in-form></sign-in-form>
     <div class="simple-account">
       <p>Example account:</p>
-      <p>Login: test.test.pl</p>
+      <p>Login: test.test@test.pl</p>
       <p>Password: test123</p>
     </div>
   </main>

@@ -2,11 +2,7 @@
   <div class="container">
     <div class="heading">
       <p class="title">{{ title }}</p>
-
-      <p class="date-time" v-if="date">
-        {{ new Date(date.seconds * 1000).toLocaleString() }}
-      </p>
-
+      <p class="date-time" v-if="date">{{ dateTime }}</p>
       <p class="author">{{ author }}</p>
     </div>
 
@@ -14,10 +10,7 @@
 
     <div class="share">
       <base-button variant="secondary" @click="like">
-        <font-awesome-icon
-          icon="fa-solid fa-heart"
-          :class="{ liked: likes?.includes(authStore.userName) }"
-        />
+        <font-awesome-icon icon="fa-solid fa-heart" :class="{ liked: liked }" />
         {{ likes?.length }}
       </base-button>
 
@@ -31,7 +24,15 @@
       </base-button>
     </div>
 
-    <comments :id="id" :comments="comments"></comments>
+    <hr v-if="commentsVisibility" class="divider" />
+
+    <comments
+      v-if="commentsVisibility"
+      :id="id"
+      :comments="comments"
+      :commentsVisibility="commentsVisibility"
+    >
+    </comments>
   </div>
   <base-loader v-if="loading"></base-loader>
 </template>
@@ -49,11 +50,18 @@ export default {
     comments: TheComments
   },
   computed: {
-    ...mapStores(useAuthStore, useMessagesStore)
+    ...mapStores(useAuthStore, useMessagesStore),
+    dateTime() {
+      return new Date(this.date.seconds * 1000).toLocaleString()
+    },
+    liked() {
+      return this.likes.includes(this.authStore.userName)
+    }
   },
   data() {
     return {
-      loading: false
+      loading: false,
+      commentsVisibility: false
     }
   },
   methods: {
@@ -70,10 +78,13 @@ export default {
       this.messagesStore.loadMessages()
     },
 
-    comment() {},
+    comment() {
+      this.commentsVisibility = !this.commentsVisibility
+    },
 
     remove() {
       this.messagesStore.removeMessage({ id: this.id })
+
       this.messagesStore.loadMessages()
     }
   }
@@ -124,5 +135,11 @@ export default {
 
 .share svg.liked {
   color: var(--colour-red);
+}
+
+.divider {
+  width: 100%;
+  border-top: 1px solid var(--colour-light-grey);
+  border-bottom: none;
 }
 </style>

@@ -6,11 +6,10 @@
       <span>!</span>
     </div>
 
-    <new-message></new-message>
+    <the-new-message></the-new-message>
 
-    <div class="messages">
+    <div v-if="!!messagesStore.data.length" class="messages">
       <base-message
-        v-if="!!messagesStore.data.length"
         v-for="entry in messagesStore.data"
         :id="entry.id"
         :date="entry.date"
@@ -21,9 +20,9 @@
         :comments="entry.comments"
       >
       </base-message>
-
-      <p class="no-messages-text" v-if="!messagesStore.data.length">No messages yet.</p>
     </div>
+
+    <p v-if="!messagesStore.data.length" class="no-messages">No messages yet.</p>
   </base-wrapper>
 </template>
 
@@ -37,7 +36,7 @@ import BaseMessage from '../UI/BaseMessage.vue'
 
 export default {
   components: {
-    'new-message': TheNewMessage,
+    'the-new-message': TheNewMessage,
     'base-message': BaseMessage
   },
   created() {
@@ -67,7 +66,7 @@ export default {
   gap: 1rem;
 }
 
-.no-messages-text {
+.no-messages {
   text-align: center;
   font-weight: 600;
 }
