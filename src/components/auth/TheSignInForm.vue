@@ -1,9 +1,9 @@
 <template>
   <form class="form" @submit.prevent="submit">
-    <div class="title-wrapper">
-      <h2>Hello!</h2>
-      <h4>Welcome back you've been missed!</h4>
-    </div>
+    <base-wrapper type="column" justify="center">
+      <base-text type="h2">Hello!</base-text>
+      <base-text type="h4">Welcome back you've been missed!</base-text>
+    </base-wrapper>
 
     <div class="form-control">
       <label>E-mail</label>
@@ -97,15 +97,6 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.title-wrapper {
-  align-self: center;
-  text-align: center;
-
-  @media (min-width: 769px) {
-    margin-bottom: 1rem;
-  }
 }
 
 .form-control {

@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <reset-password-form></reset-password-form>
-  </main>
+  <reset-password-form></reset-password-form>
 </template>
 
 <script>

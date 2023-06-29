@@ -1,7 +1,11 @@
 <template>
-  <div class="layout">
+  <div class="outer">
     <the-header></the-header>
-    <RouterView class="context" />
+
+    <main class="inner">
+      <RouterView />
+    </main>
+
     <the-footer></the-footer>
   </div>
 </template>
@@ -21,13 +25,13 @@ export default {
 </script>
 
 <style scoped>
-.layout {
+.outer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.context {
+.inner {
   width: 100%;
   display: flex;
   justify-content: center;

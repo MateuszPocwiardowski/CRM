@@ -1,32 +1,20 @@
 <template>
-  <base-wrapper type="column">
-    <div class="title" v-if="authStore.userName">
-      <span>Hello, </span>
-      <span class="user-name">{{ authStore.userName }}</span>
-      <span>!</span>
-    </div>
+  <base-wrapper type="column" justify="center" gap="1">
+    <base-text type="span" size="xxl">Hello, {{ authStore.userName }}!</base-text>
 
-    <the-new-message></the-new-message>
+    <base-wrapper type="row" justify="flex-end" gap=".5">
+      <router-link :to="{ name: 'new-message' }" class="link"> Message </router-link>
+      <router-link :to="{ name: 'new-client' }" class="link"> Client </router-link>
+    </base-wrapper>
 
-    <div v-if="!!messagesStore.data.length" class="messages">
-      <base-message
-        v-for="entry in messagesStore.data"
-        :id="entry.id"
-        :date="entry.date"
-        :author="entry.author"
-        :title="entry.title"
-        :message="entry.message"
-        :likes="entry.likes"
-        :comments="entry.comments"
-      >
-      </base-message>
-    </div>
-
-    <p v-if="!messagesStore.data.length" class="no-messages">No messages yet.</p>
+    <base-wrapper>
+      <RouterView />
+    </base-wrapper>
   </base-wrapper>
 </template>
 
 <script>
+import { RouterView } from 'vue-router'
 import { mapStores } from 'pinia'
 import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
@@ -39,7 +27,7 @@ export default {
     'the-new-message': TheNewMessage,
     'base-message': BaseMessage
   },
-  created() {
+  beforeMount() {
     this.messagesStore.loadMessages()
   },
   computed: {
@@ -49,21 +37,20 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.user-name {
+.link {
+  font-size: 1rem;
   font-weight: 500;
+  background-color: var(--colour-white);
+  color: var(--colour-green);
+  border: 2px solid var(--colour-green);
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
 }
 
-.messages {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.router-link-active {
+  color: var(--colour-white);
+  background-color: var(--colour-green);
 }
 
 .no-messages {

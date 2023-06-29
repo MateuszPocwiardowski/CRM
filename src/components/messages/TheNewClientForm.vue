@@ -1,18 +1,11 @@
 <template>
   <form class="form" @submit.prevent="submit">
     <div class="form-control">
-      <input type="text" name="title" placeholder="Title" ref="title" @focus="resetError" />
+      <input type="text" name="name" placeholder="Name" ref="name" @focus="resetError" />
       <div v-if="error" v-html="warning"></div>
     </div>
 
-    <div class="form-control">
-      <input type="text" name="message" placeholder="Message" ref="message" @focus="resetError" />
-      <div v-if="error" v-html="warning"></div>
-    </div>
-
-    <base-button v-if="!loading" variant="primary" :type="submit" class="button">
-      Publish
-    </base-button>
+    <base-button v-if="!loading" variant="primary" :type="submit" class="button"> Add </base-button>
   </form>
   <base-loader v-if="loading"></base-loader>
 </template>
@@ -38,30 +31,7 @@ export default {
       this.error = false
     },
     submit() {
-      const enteredTitle = this.$refs.title.value
-      const enteredMessage = this.$refs.message.value
-
-      if (enteredTitle.trim() === '' || enteredMessage.trim() === '') {
-        this.error = true
-
-        return
-      }
-
-      try {
-        this.loading = true
-        this.messagesStore.addNewMessage({
-          author: this.authStore.userName,
-          title: enteredTitle,
-          message: enteredMessage
-        })
-
-        this.messagesStore.loadMessages()
-        this.$router.replace({ name: 'dashboard' })
-        this.loading = false
-      } catch (err) {
-        this.loading = false
-        this.error = true
-      }
+      
     }
   }
 }

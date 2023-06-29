@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import BaseText from './components/UI/BaseText.vue'
 import BaseWrapper from './components/UI/BaseWrapper.vue'
 import BaseButton from './components/UI/BaseButton.vue'
 import BaseLogo from './components/UI/BaseLogo.vue'
@@ -39,6 +40,7 @@ library.add(
   faShare
 )
 
+app.component('base-text', BaseText)
 app.component('base-wrapper', BaseWrapper)
 app.component('base-button', BaseButton)
 app.component('base-logo', BaseLogo)

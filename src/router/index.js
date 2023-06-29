@@ -27,6 +27,18 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
+      children: [
+        {
+          path: '/dashboard/new-message',
+          name: 'new-message',
+          component: () => import('../components/messages/TheNewMessageForm.vue')
+        },
+        {
+          path: '/dashboard/new-client',
+          name: 'new-client',
+          component: () => import('../components/messages/TheNewClientForm.vue')
+        }
+      ],
       meta: { requiresAuth: true }
     },
     {

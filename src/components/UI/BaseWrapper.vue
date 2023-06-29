@@ -1,12 +1,39 @@
 <template>
-  <div class="wrapper" :class="type">
+  <div
+    class="wrapper"
+    :class="`${type}`"
+    :style="`gap: ${gap}rem; ${type === 'row' ? 'justify-content:' : 'align-items:'} ${justify}`"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['type']
+  props: {
+    type: {
+      validator: (value) => {
+        return ['row', 'column'].includes(value)
+      },
+      default: 'row',
+      type: String
+    },
+    justify: {
+      validator: (value) => {
+        return [
+          'flex-start',
+          'center',
+          'flex-end',
+          'space-between',
+          'space-around',
+          'space-evenly'
+        ].includes(value)
+      },
+      default: 'flex-start',
+      type: String
+    },
+    gap: Number
+  }
 }
 </script>
 
@@ -20,14 +47,13 @@ export default {
 
 .row {
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   align-content: center;
 }
 
 .column {
-  align-self: flex-start;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
 }
 </style>

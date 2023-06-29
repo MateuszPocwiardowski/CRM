@@ -9,17 +9,17 @@
     <p class="message">{{ message }}</p>
 
     <div class="share">
-      <base-button variant="secondary" @click="like">
+      <base-button variant="text" @click="like">
         <font-awesome-icon icon="fa-solid fa-heart" :class="{ liked: liked }" />
         {{ likes?.length }}
       </base-button>
 
-      <base-button variant="secondary" @click="comment">
+      <base-button variant="text" @click="comment">
         <font-awesome-icon icon="fa-solid fa-comment" />
         {{ comments?.length }}
       </base-button>
 
-      <base-button variant="secondary" @click="remove" v-if="author === authStore.userName">
+      <base-button variant="text" @click="remove" v-if="author === authStore.userName">
         <font-awesome-icon icon="fa-solid fa-trash" />
       </base-button>
     </div>

@@ -63,7 +63,9 @@ export const useMessagesStore = defineStore('messages', {
     async loadMessages() {
       try {
         const query = await getDocs(collection(db, 'messages'))
-        this.data = query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        this.data = query.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .sort((doc) => doc.date.seconds)
       } catch (error) {
         throw new Error(error.message)
       }

@@ -1,12 +1,12 @@
 <template>
-  <main class="main">
+  <base-wrapper type="column" justify="center" gap="2">
     <sign-in-form></sign-in-form>
     <div class="simple-account">
       <p>Example account:</p>
       <p>Login: test.test@test.pl</p>
       <p>Password: test123</p>
     </div>
-  </main>
+  </base-wrapper>
 </template>
 
 <script>
@@ -21,13 +21,6 @@ export default {
 
 <style scoped>
 /* TODO: Remove login and password to example user */
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-}
 
 .simple-account {
   text-align: center;

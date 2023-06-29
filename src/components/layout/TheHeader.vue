@@ -1,5 +1,5 @@
 <template>
-  <base-wrapper type="row">
+  <base-wrapper type="row" justify="space-between">
     <base-logo class="logo"></base-logo>
 
     <nav v-if="authStore.isLoggedIn" class="nav">

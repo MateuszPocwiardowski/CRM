@@ -1,9 +1,9 @@
 <template>
   <form class="form" @submit.prevent="submit">
-    <div class="title-wrapper">
-      <h2>Sign up</h2>
-      <h4>Sign up new employee using this form.</h4>
-    </div>
+    <base-wrapper type="column" justify="center">
+      <base-text type="h2">Sign up</base-text>
+      <base-text type="h4">Sign up new employee using this form.</base-text>
+    </base-wrapper>
 
     <div class="form-control">
       <label>E-mail</label>

@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <sign-up-form></sign-up-form>
-  </main>
+  <sign-up-form></sign-up-form>
 </template>
 
 <script>
