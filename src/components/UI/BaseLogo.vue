@@ -1,7 +1,7 @@
 <template>
   <!-- prettier-ignore -->
   <router-link to="/dashboard" class="logo">
-    Vue<div class="logo-green">.js</div>
+    CRM<div class="logo-green">.js</div>
   </router-link>
 </template>
 

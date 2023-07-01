@@ -56,8 +56,8 @@ export default {
         })
 
         this.messagesStore.loadMessages()
-        this.$router.replace({ name: 'dashboard' })
         this.loading = false
+        this.$router.push({ name: 'dashboard' })
       } catch (err) {
         this.loading = false
         this.error = true
@@ -73,7 +73,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .form-control {
@@ -90,7 +90,7 @@ export default {
   color: inherit;
   outline: none;
   border: none;
-  padding: 1rem;
+  padding: 0.5rem;
   border: 1px solid var(--colour-light-grey);
   border-radius: var(--input-border-radius);
   -webkit-border-radius: var(--input-border-radius);
@@ -107,6 +107,6 @@ export default {
 
 .button {
   align-self: flex-end;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
 }
 </style>

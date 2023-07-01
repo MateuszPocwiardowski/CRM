@@ -33,10 +33,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-  font-size: 1rem;
-}
-
 .nav {
   display: flex;
 }

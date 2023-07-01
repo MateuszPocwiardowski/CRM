@@ -7,6 +7,7 @@ import BaseWrapper from './components/UI/BaseWrapper.vue'
 import BaseButton from './components/UI/BaseButton.vue'
 import BaseLogo from './components/UI/BaseLogo.vue'
 import BaseLoader from './components/UI/BaseLoader.vue'
+import BaseModal from './components/UI/BaseModal.vue'
 
 import router from './router'
 
@@ -19,7 +20,9 @@ import {
   faHeart,
   faComment,
   faTrash,
-  faShare
+  faShare,
+  faPlus,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
@@ -37,7 +40,9 @@ library.add(
   faHeart,
   faComment,
   faTrash,
-  faShare
+  faShare,
+  faPlus,
+  faXmark
 )
 
 app.component('base-text', BaseText)
@@ -45,9 +50,14 @@ app.component('base-wrapper', BaseWrapper)
 app.component('base-button', BaseButton)
 app.component('base-logo', BaseLogo)
 app.component('base-loader', BaseLoader)
+app.component('base-modal', BaseModal)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(router)
 app.use(pinia)
+
+app.component('modal', {
+  template: '#modal-template'
+})
 
 app.mount('#app')

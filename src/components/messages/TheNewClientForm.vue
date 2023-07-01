@@ -5,6 +5,21 @@
       <div v-if="error" v-html="warning"></div>
     </div>
 
+    <div class="form-control">
+      <input type="text" name="NIP" placeholder="NIP" ref="NIP" @focus="resetError" />
+      <div v-if="error" v-html="warning"></div>
+    </div>
+
+    <div class="form-control">
+      <input type="text" name="adress1" placeholder="Adress line 1" ref="adress1" @focus="resetError" />
+      <div v-if="error" v-html="warning"></div>
+    </div>
+
+    <div class="form-control">
+      <input type="text" name="adress2" placeholder="Adress line 2" ref="adress2" @focus="resetError" />
+      <div v-if="error" v-html="warning"></div>
+    </div>
+
     <base-button v-if="!loading" variant="primary" :type="submit" class="button"> Add </base-button>
   </form>
   <base-loader v-if="loading"></base-loader>
@@ -30,9 +45,7 @@ export default {
     resetError() {
       this.error = false
     },
-    submit() {
-      
-    }
+    submit() {}
   }
 }
 </script>
@@ -43,7 +56,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: .5rem;
 }
 
 .form-control {
@@ -60,7 +73,7 @@ export default {
   color: inherit;
   outline: none;
   border: none;
-  padding: 1rem;
+  padding: 0.5rem;
   border: 1px solid var(--colour-light-grey);
   border-radius: var(--input-border-radius);
   -webkit-border-radius: var(--input-border-radius);
@@ -77,6 +90,6 @@ export default {
 
 .button {
   align-self: flex-end;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
 }
 </style>
