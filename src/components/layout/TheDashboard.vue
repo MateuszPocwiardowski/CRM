@@ -1,12 +1,6 @@
 <template>
-  <base-wrapper type="column" justify="center" gap="1">
-    <base-text type="span" size="xxl">Hello, {{ authStore.userName }}!</base-text>
-
-    <div class="new-item-container">
-      <button class="new-item" @click="showModal">
-        <font-awesome-icon icon="fa-solid fa-plus" />
-      </button>
-    </div>
+  <base-wrapper type="column" justify="center" gap=".5">
+    <base-breadcrumbs></base-breadcrumbs>
 
     <base-wrapper v-if="messagesStore.data.length" type="column" gap=".5">
       <base-message
@@ -21,8 +15,15 @@
       >
       </base-message>
     </base-wrapper>
+    <base-text v-else>No messages yet.</base-text>
 
-    <base-text v-if="!messagesStore.data.length">No messages yet.</base-text>
+    <base-wrapper type="row" justify="flex-end">
+      <div class="new-item-container">
+        <button class="new-item" @click="showModal">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+        </button>
+      </div>
+    </base-wrapper>
 
     <base-modal v-if="modalVisiblity">
       <template #header>
@@ -86,7 +87,6 @@ export default {
 <style scoped>
 .new-item-container {
   position: fixed;
-  right: 1rem;
   bottom: 1rem;
 }
 
@@ -95,7 +95,7 @@ export default {
   height: 3rem;
   border: none;
   border-radius: 50%;
-  background-color: var(--colour-dark-green);
+  background-color: var(--colour-green);
   cursor: pointer;
 }
 
@@ -119,6 +119,8 @@ export default {
 
 .link {
   padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
 }
 
 .router-link-active {

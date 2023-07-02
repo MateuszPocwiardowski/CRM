@@ -2,14 +2,14 @@
   --colour-white: #ffff;
   --colour-red: #cc2c2c;
   --colour-dark-green: #398562;
-  --colour-green: #42b883;
-  --colour-light-green: #42d3926c;
-  --colour-lighter-green: #42d3922f;
+  --colour-green: #64d1a0;
+  --colour-light-green: #98e0c0;
+  --colour-lighter-green: #d3fdea;
   --colour-grey: #919191;
   --colour-light-grey: #9c9c9c;
   --colour-dark-grey: #282828;
 
-  --input-border-radius: 4px;
+  --border-radius: 6px;
 }
 
 *,

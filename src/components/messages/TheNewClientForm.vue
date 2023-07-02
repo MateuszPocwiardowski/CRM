@@ -11,12 +11,24 @@
     </div>
 
     <div class="form-control">
-      <input type="text" name="adress1" placeholder="Adress line 1" ref="adress1" @focus="resetError" />
+      <input
+        type="text"
+        name="adress1"
+        placeholder="Adress line 1"
+        ref="adress1"
+        @focus="resetError"
+      />
       <div v-if="error" v-html="warning"></div>
     </div>
 
     <div class="form-control">
-      <input type="text" name="adress2" placeholder="Adress line 2" ref="adress2" @focus="resetError" />
+      <input
+        type="text"
+        name="adress2"
+        placeholder="Adress line 2"
+        ref="adress2"
+        @focus="resetError"
+      />
       <div v-if="error" v-html="warning"></div>
     </div>
 
@@ -56,7 +68,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .form-control {
@@ -75,8 +87,8 @@ export default {
   border: none;
   padding: 0.5rem;
   border: 1px solid var(--colour-light-grey);
-  border-radius: var(--input-border-radius);
-  -webkit-border-radius: var(--input-border-radius);
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
 }
 
 .form-control input::placeholder {

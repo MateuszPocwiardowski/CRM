@@ -90,8 +90,8 @@ export default {
   border: none;
   padding: 0.5rem;
   border: 1px solid var(--colour-light-grey);
-  border-radius: var(--input-border-radius);
-  -webkit-border-radius: var(--input-border-radius);
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
 }
 
 .form-control input::placeholder {

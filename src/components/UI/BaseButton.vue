@@ -16,7 +16,8 @@ export default {
 .button-text {
   font-size: 1rem;
   font-weight: 400;
-  border-radius: 2rem;
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
 }

@@ -32,6 +32,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  -webkit-border-radius: 50%;
   background: var(--colour-dark-green);
   margin: -4px 0 0 -4px;
 }

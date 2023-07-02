@@ -8,6 +8,7 @@ import BaseButton from './components/UI/BaseButton.vue'
 import BaseLogo from './components/UI/BaseLogo.vue'
 import BaseLoader from './components/UI/BaseLoader.vue'
 import BaseModal from './components/UI/BaseModal.vue'
+import BaseBreadcrumbs from './components/UI/BaseBreadcrumbs.vue'
 
 import router from './router'
 
@@ -22,7 +23,11 @@ import {
   faTrash,
   faShare,
   faPlus,
-  faXmark
+  faXmark,
+  faBell,
+  faBars,
+  faRightToBracket,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
@@ -42,7 +47,11 @@ library.add(
   faTrash,
   faShare,
   faPlus,
-  faXmark
+  faXmark,
+  faBell,
+  faBars,
+  faRightToBracket,
+  faRightFromBracket
 )
 
 app.component('base-text', BaseText)
@@ -51,6 +60,7 @@ app.component('base-button', BaseButton)
 app.component('base-logo', BaseLogo)
 app.component('base-loader', BaseLoader)
 app.component('base-modal', BaseModal)
+app.component('base-breadcrumbs', BaseBreadcrumbs)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(router)
