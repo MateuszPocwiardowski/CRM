@@ -1,8 +1,8 @@
 <template>
-  <base-wrapper type="column" justify="center" gap=".5">
+  <base-wrapper type="column" justify="center" gap="1">
     <base-breadcrumbs></base-breadcrumbs>
 
-    <base-wrapper v-if="messagesStore.data.length" type="column" gap=".5">
+    <!-- <base-wrapper v-if="messagesStore.data.length" type="column" gap=".5">
       <base-message
         v-for="entry in messagesStore.data"
         :id="entry.id"
@@ -14,8 +14,8 @@
         :comments="entry.comments"
       >
       </base-message>
-    </base-wrapper>
-    <base-text v-else>No messages yet.</base-text>
+    </base-wrapper> -->
+    <base-text>No messages yet.</base-text>
 
     <base-wrapper type="row" justify="flex-end">
       <div class="new-item-container">

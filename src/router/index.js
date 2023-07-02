@@ -44,12 +44,12 @@ const router = createRouter({
     {
       path: '/clients',
       name: 'clients',
-      component: () => import('../views/DashboardView.vue')
+      component: () => import('../views/ClientsView.vue')
     },
     {
       path: '/account-settings',
       name: 'account-settings',
-      component: () => import('../views/DashboardView.vue')
+      component: () => import('../views/AccountSettingsView.vue')
     },
     {
       path: '/',

@@ -1,5 +1,5 @@
 <template>
-  <dashboard></dashboard>
+  <the-dashboard></the-dashboard>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ import TheDashboard from '../components/layout/TheDashboard.vue'
 
 export default {
   components: {
-    dashboard: TheDashboard
+    'the-dashboard': TheDashboard
   }
 }
 </script>
