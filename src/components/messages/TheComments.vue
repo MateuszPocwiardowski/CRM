@@ -6,21 +6,13 @@
         <p class="message">{{ comment.message }}</p>
       </div>
     </div>
-
-    <the-new-comment :id="id"></the-new-comment>
-
     <p class="no-comments" v-if="!comments?.length">No comments yet.</p>
   </base-wrapper>
 </template>
 
 <script>
-import TheNewComment from './TheNewComment.vue'
-
 export default {
-  props: ['id', 'comments'],
-  components: {
-    'the-new-comment': TheNewComment
-  }
+  props: ['id', 'comments']
 }
 </script>
 

@@ -26,13 +26,15 @@
 
     <hr v-if="commentsVisibility" class="divider" />
 
-    <comments
+    <the-comments
       v-if="commentsVisibility"
       :id="id"
       :comments="comments"
       :commentsVisibility="commentsVisibility"
     >
-    </comments>
+    </the-comments>
+
+    <the-new-comment v-if="commentsVisibility" :id="id"></the-new-comment>
   </div>
   <base-loader v-if="loading"></base-loader>
 </template>
@@ -42,12 +44,14 @@ import { mapStores } from 'pinia'
 import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
 
-import TheComments from '../messages/TheComments.vue'
+import TheComments from './TheComments.vue'
+import TheNewComment from './TheNewComment.vue'
 
 export default {
   props: ['id', 'date', 'author', 'title', 'message', 'likes', 'comments'],
   components: {
-    comments: TheComments
+    'the-comments': TheComments,
+    'the-new-comment': TheNewComment
   },
   computed: {
     ...mapStores(useAuthStore, useMessagesStore),
@@ -97,7 +101,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: 1px solid var(--colour-light-grey);
+  border: 1px solid var(--colour-lighter-grey);
   border-radius: var(--border-radius);
   -webkit-border-radius: var(--border-radius);
   padding: 1rem;

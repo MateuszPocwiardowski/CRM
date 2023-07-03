@@ -2,8 +2,8 @@
   <base-wrapper type="column" justify="center" gap="1">
     <base-breadcrumbs></base-breadcrumbs>
 
-    <!-- <base-wrapper v-if="messagesStore.data.length" type="column" gap=".5">
-      <base-message
+    <base-wrapper v-if="messagesStore.data.length" type="column" gap=".5">
+      <the-message
         v-for="entry in messagesStore.data"
         :id="entry.id"
         :date="entry.date"
@@ -13,9 +13,9 @@
         :likes="entry.likes"
         :comments="entry.comments"
       >
-      </base-message>
-    </base-wrapper> -->
-    <base-text>No messages yet.</base-text>
+      </the-message>
+    </base-wrapper>
+    <base-text v-else>No messages yet.</base-text>
 
     <base-wrapper type="row" justify="flex-end">
       <div class="new-item-container">
@@ -53,12 +53,12 @@ import { useAuthStore } from '../../stores/auth'
 import { useMessagesStore } from '../../stores/messages'
 
 import TheNewMessage from '../messages/TheNewMessageForm.vue'
-import BaseMessage from '../UI/BaseMessage.vue'
+import TheMessage from '../messages/TheMessage.vue'
 
 export default {
   components: {
     'the-new-message': TheNewMessage,
-    'base-message': BaseMessage
+    'the-message': TheMessage
   },
   beforeMount() {
     this.messagesStore.loadMessages()

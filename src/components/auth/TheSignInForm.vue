@@ -6,10 +6,11 @@
     </base-wrapper>
 
     <div class="form-control">
-      <label>E-mail</label>
+      <label for="email">E-mail</label>
       <div class="input-wrapper">
         <font-awesome-icon icon="fa-solid fa-user" />
         <input
+          id="email"
           type="email"
           name="email"
           placeholder="Type your e-mail"

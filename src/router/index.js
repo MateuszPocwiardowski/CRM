@@ -44,12 +44,14 @@ const router = createRouter({
     {
       path: '/clients',
       name: 'clients',
-      component: () => import('../views/ClientsView.vue')
+      component: () => import('../views/ClientsView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/account-settings',
       name: 'account-settings',
-      component: () => import('../views/AccountSettingsView.vue')
+      component: () => import('../views/AccountSettingsView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/',
